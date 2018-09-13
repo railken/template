@@ -1,0 +1,34 @@
+{
+    "name": "railken/template",
+    "keywords": ["template"],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1",
+        "railken/bag": "^1.2",
+        "rcrowe/twigbridge": "^0.9.6",
+        "mewesk/twig-excel-bundle": "^2.1",
+        "dompdf/dompdf": "^0.8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0",
+        "phpstan/phpstan": "^0.10",
+        "orchestra/testbench": "~3.6",
+        "friendsofphp/php-cs-fixer": "^2.8.1",
+        "spatie/pdf-to-text": "^1.1"
+    },
+    "autoload": {
+        "psr-4" : {
+            "Railken\\Template\\" : "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": { "Railken\\Template\\Tests\\": "tests/" }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Railken\\Template\\TemplateServiceProvider"
+            ]
+        }
+    }
+}
