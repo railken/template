@@ -19,7 +19,19 @@ class PdfGenerator extends BaseGenerator
     {
         $html = Twig::render($filename, $data);
 
-        $dompdf = new Dompdf(['enable_remote' => true]);
+        $dir = sys_get_temp_dir()."/dompdf";
+
+        if (!file_exists($dir)) {
+            mkdir($dir);
+        }
+
+        $dompdf = new Dompdf([
+            'temp_dir' => $dir,
+            'font_cache' => $dir,
+            'fond_dir' => $dir,
+            'enable_remote' => true
+        ]);
+
         $dompdf->loadHtml($html);
         $dompdf->render();
 
