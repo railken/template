@@ -25,7 +25,7 @@ class BaseGenerator implements GeneratorContract
     {
         $name = $this->getRandomName();
 
-        $path = storage_path().Config::get('ore.template.cache');
+        $path = sys_get_temp_dir();
 
         $filename = $path.'/'.$name.'.twig';
 
