@@ -3,6 +3,7 @@
 namespace Railken\Template\Generators;
 
 use Dompdf\Dompdf;
+use Dompdf\Options;
 use Twig;
 
 class PdfGenerator extends BaseGenerator
@@ -21,20 +22,31 @@ class PdfGenerator extends BaseGenerator
 
         $dir = sys_get_temp_dir()."/dompdf";
 
-        if (!file_exists($dir)) {
-            mkdir($dir);
-        }
-
-        $dompdf = new Dompdf([
-            'temp_dir' => $dir,
-            'font_cache' => $dir,
-            'fond_dir' => $dir,
-            'enable_remote' => true
-        ]);
+        $options = new Options();
+        $options->setIsRemoteEnabled(true);
+        $options->setFontDir($this->resolveDirectory($dir."/lib/fonts"));
+        $options->setFontCache($this->resolveDirectory($dir."/lib/fonts"));
+        //$options->setRootDir($this->resolveDirectory($dir));
+        //$options->setChroot($this->resolveDirectory($dir));
+        $dompdf = new Dompdf($options);
 
         $dompdf->loadHtml($html);
         $dompdf->render();
 
         return $dompdf->output();
+    }
+
+    /**
+     * @param string $dir
+     *
+     * @return string
+     */
+    public function resolveDirectory(string $dir)
+    {
+        if (!file_exists($dir)) {
+            mkdir($dir, 0777, true);
+        }
+
+        return $dir;
     }
 }
