@@ -46,7 +46,7 @@ class BaseGenerator implements GeneratorContract
     {
         return sha1(microtime());
     }
-    
+
     /**
      * Remove a file.
      *
