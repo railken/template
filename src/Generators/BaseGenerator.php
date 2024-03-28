@@ -2,7 +2,6 @@
 
 namespace Railken\Template\Generators;
 
-use Illuminate\Support\Facades\Config;
 use Twig;
 
 class BaseGenerator implements GeneratorContract
@@ -45,9 +44,9 @@ class BaseGenerator implements GeneratorContract
      */
     public function getRandomName()
     {
-        return sha1(microtime().str_random(20));
+        return sha1(microtime());
     }
-
+    
     /**
      * Remove a file.
      *

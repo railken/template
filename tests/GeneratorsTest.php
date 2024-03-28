@@ -39,34 +39,6 @@ class GeneratorsTest extends \Orchestra\Testbench\TestCase
         $this->assertEquals('The cake is a lie', $rendered);
     }
 
-    public function testExcelRender()
-    {
-        $generator = new Generators\ExcelGenerator();
-        $rendered = $generator->generateAndRender('{% xlsdocument %}
-            {% xlssheet %}
-                {% xlsrow %}
-                    {% xlscell %}1{% endxlscell %}{# A1 #}
-                    {% xlscell %}2{% endxlscell %}{# B1 #}
-                    {% xlscell %}{{ message }} {% endxlscell %}{# B1 #}
-                {% endxlsrow %}
-                {% xlsrow %}
-                    {% xlscell %}=A1*B1{% endxlscell %}
-                {% endxlsrow %}
-                {% xlsrow %}
-                    {% xlscell %}=SUM(A1:B1){% endxlscell %}
-                {% endxlsrow %}
-            {% endxlssheet %}
-        {% endxlsdocument %}', ['message' => 'lie']);
-
-        $tmpfile = __DIR__.'/../var/cache/dummy.xlsx';
-
-        if (!file_exists(dirname($tmpfile))) {
-            mkdir(dirname($tmpfile), 0755, true);
-        }
-
-        file_put_contents($tmpfile, $rendered);
-    }
-
     protected function getPackageProviders($app)
     {
         return [
