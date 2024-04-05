@@ -44,7 +44,7 @@ class BaseGenerator implements GeneratorContract
      */
     public function getRandomName()
     {
-        return sha1(microtime());
+        return sha1(rand() * rand());
     }
 
     /**
